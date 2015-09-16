@@ -13,7 +13,7 @@ class BoardTest < MiniTest::Test
 	def test_piece_retrieval
 		board = Board.new
 		piece = board["a1"]
-		assert_instance_of Rook
+		assert_instance_of Rook, piece
 	end
 
 end
