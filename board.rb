@@ -8,9 +8,12 @@ class Board
 		@piece_count = 32
 		@black_count = 16
 		@white_count = 16
+
+		@pieces = {}
+		@pieces["a1"] = Rook.new
 	end
 
 	def [] coordinate
-		Rook.new
+		@pieces[coordinate] 
 	end
 end
