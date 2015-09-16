@@ -23,4 +23,9 @@ class BoardTest < MiniTest::Test
 		refute_nil board["a3"]
 	end
 
+	def test_piece_color
+		board = Board.new
+		piece = board["a1"]
+		assert_equal :white, piece.color
+	end
 end
