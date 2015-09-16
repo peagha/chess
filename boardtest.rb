@@ -8,6 +8,12 @@ class BoardTest < MiniTest::Test
 		assert_equal 32, board.piece_count
 		assert_equal 16, board.white_count
 		assert_equal 16, board.black_count
+		[1,2,7,8].each do |rank|
+			('a'..'h').each do |file|
+				coordinate = file + rank.to_s
+				refute_nil board[coordinate], "#{coordinate} should have a piece"
+			end
+		end
 	end
 
 	def test_piece_retrieval
