@@ -16,4 +16,11 @@ class BoardTest < MiniTest::Test
 		assert_instance_of Rook, piece
 	end
 
+	def test_piece_move
+		board = Board.new
+		assert_nil board["a3"]
+		board.move "a2", "a3"
+		refute_nil board["a3"]
+	end
+
 end
