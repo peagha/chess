@@ -16,4 +16,7 @@ class Board
 	def [] coordinate
 		@pieces[coordinate] 
 	end
+
+	def move from, to
+	end
 end
