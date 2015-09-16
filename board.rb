@@ -1,3 +1,5 @@
+require_relative "rook"
+
 class Board
 
 	attr_accessor :piece_count, :white_count, :black_count
@@ -9,6 +11,6 @@ class Board
 	end
 
 	def [] coordinate
-		nil
+		Rook.new
 	end
 end
