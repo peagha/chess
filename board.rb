@@ -7,4 +7,8 @@ class Board
 		@black_count = 16
 		@white_count = 16
 	end
+
+	def [] coordinate
+		nil
+	end
 end
