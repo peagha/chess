@@ -1,4 +1,5 @@
 require_relative "rook"
+require_relative "pawn"
 
 class Board
 
@@ -11,6 +12,7 @@ class Board
 
 		@pieces = {}
 		@pieces["a1"] = Rook.new
+		@pieces["a2"] = Pawn.new
 	end
 
 	def [] coordinate
@@ -18,5 +20,7 @@ class Board
 	end
 
 	def move from, to
+		@pieces[to] = @pieces[from]
+		@pieces[from] = nil
 	end
 end
