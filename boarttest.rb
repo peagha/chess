@@ -1,4 +1,5 @@
 require 'minitest/autorun'
+require_relative 'board'
 
 class BoardTest < MiniTest::Test
 
