@@ -10,4 +10,10 @@ class BoardTest < MiniTest::Test
 		assert_equal 16, board.black_count
 	end
 
+	def test_piece_retrieval
+		board = Board.new
+		piece = board["a1"]
+		assert_instance_of Rook
+	end
+
 end
