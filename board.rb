@@ -15,10 +15,6 @@ class Board
 	def setup
 		@pieces["a1"] = Rook.new
 		@pieces["a2"] = Pawn.new
-		
-		@piece_count = 32
-		@black_count = 16
-		@white_count = 16
 	end
 
 	def [] coordinate
