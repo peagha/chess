@@ -3,13 +3,16 @@ require_relative "pawn"
 
 class Board
 
-	attr_accessor :piece_count, :white_count, :black_count
+	attr_accessor :white_count, :black_count
 
 	def initialize
 		@pieces = {}
-		@piece_count = 0
 		@black_count = 0
 		@white_count = 0
+	end
+
+	def piece_count
+		@pieces.count
 	end
 
 	def setup
