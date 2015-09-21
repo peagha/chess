@@ -34,4 +34,14 @@ class BoardTest < MiniTest::Test
 		piece = board["a1"]
 		assert_equal :white, piece.color
 	end
+
+	def test_empty_board
+		board = Board.empty
+		(1..8).each do |rank|
+			('a'..'h').each do |file|
+				coordinate = file + rank.to_s
+				assert_nil board[coordinate], "#{coordinate} should be empty"
+			end
+		end
+	end
 end
