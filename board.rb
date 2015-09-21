@@ -11,6 +11,9 @@ class Board
 		@white_count = 16
 
 		@pieces = {}
+	end
+
+	def setup
 		@pieces["a1"] = Rook.new
 		@pieces["a2"] = Pawn.new
 	end
@@ -22,5 +25,9 @@ class Board
 	def move from, to
 		@pieces[to] = @pieces[from]
 		@pieces[from] = nil
+	end
+
+	def self.empty
+		Board.new
 	end
 end
