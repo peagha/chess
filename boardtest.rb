@@ -19,6 +19,7 @@ class BoardTest < MiniTest::Test
 	def test_set_piece
 		board = Board.empty
 		board["a1"] = Pawn.new
+		assert_equal 1, board.piece_count
 	end
 
 	def test_piece_retrieval
