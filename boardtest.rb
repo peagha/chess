@@ -18,12 +18,14 @@ class BoardTest < MiniTest::Test
 
 	def test_piece_retrieval
 		board = Board.new
+		board.setup
 		piece = board["a1"]
 		assert_instance_of Rook, piece
 	end
 
 	def test_piece_move
 		board = Board.new
+		board.setup
 		assert_nil board["a3"]
 		board.move "a2", "a3"
 		refute_nil board["a3"]
@@ -31,6 +33,7 @@ class BoardTest < MiniTest::Test
 
 	def test_piece_color
 		board = Board.new
+		board.setup
 		piece = board["a1"]
 		assert_equal :white, piece.color
 	end
