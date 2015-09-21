@@ -16,6 +16,11 @@ class BoardTest < MiniTest::Test
 	#	end
 	#end
 
+	def test_set_piece
+		board = Board.empty
+		board["a1"] = Pawn.new
+	end
+
 	def test_piece_retrieval
 		board = Board.new
 		board.setup
