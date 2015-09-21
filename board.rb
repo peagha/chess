@@ -6,16 +6,19 @@ class Board
 	attr_accessor :piece_count, :white_count, :black_count
 
 	def initialize
-		@piece_count = 32
-		@black_count = 16
-		@white_count = 16
-
 		@pieces = {}
+		@piece_count = 0
+		@black_count = 0
+		@white_count = 0
 	end
 
 	def setup
 		@pieces["a1"] = Rook.new
 		@pieces["a2"] = Pawn.new
+		
+		@piece_count = 32
+		@black_count = 16
+		@white_count = 16
 	end
 
 	def [] coordinate
