@@ -40,6 +40,10 @@ class BoardTest < MiniTest::Test
 
 	def test_empty_board
 		board = Board.empty
+		assert_equal 0, board.piece_count
+		assert_equal 0, board.white_count
+		assert_equal 0, board.black_count
+
 		(1..8).each do |rank|
 			('a'..'h').each do |file|
 				coordinate = file + rank.to_s
