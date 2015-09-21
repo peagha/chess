@@ -25,6 +25,10 @@ class Board
 		@pieces[coordinate] 
 	end
 
+	def []= coordinate, value
+		@pieces[coordinate] = value
+	end
+
 	def move from, to
 		@pieces[to] = @pieces[from]
 		@pieces[from] = nil
