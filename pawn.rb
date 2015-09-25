@@ -1,11 +1,11 @@
 class Pawn
 	private
-	def initialize color = nil
-		@color = color
+	def initialize team = nil
+		@team = team
 	end
 
 	public
-	attr_reader :color
+	attr_reader :team
 
 	def self.white
 		Pawn.new :white
