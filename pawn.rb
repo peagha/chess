@@ -11,4 +11,8 @@ class Pawn
 		Pawn.new :white
 	end
 
+	def self.black
+		Pawn.new :black
+	end
+
 end
