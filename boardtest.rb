@@ -57,4 +57,9 @@ class BoardTest < MiniTest::Test
 		board = Board.new
 		assert_equal board, board.setup
 	end
+
+	def test_piece_team
+		pawn = Pawn.white
+		assert_equal :white, pawn.color
+	end
 end
