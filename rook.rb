@@ -1,15 +1,4 @@
-class Rook
+require_relative 'piece'
 
-	private
-	def initialize team = nil
-		@team = team
-	end
-
-	public
-	attr_reader :team
-
-	def self.white
-		Pawn.new :white
-	end
-
+class Rook < Piece
 end

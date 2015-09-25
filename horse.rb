@@ -1,2 +1,4 @@
-class Horse 
+require_relative 'piece'
+
+class Horse < Piece 
 end
