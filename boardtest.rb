@@ -33,12 +33,6 @@ class BoardTest < MiniTest::Test
 		refute_nil board["a3"]
 	end
 
-	def test_piece_color
-		board = Board.new.setup
-		piece = board["a1"]
-		assert_equal :white, piece.color
-	end
-
 	def test_empty_board
 		board = Board.empty
 		assert_equal 0, board.piece_count
