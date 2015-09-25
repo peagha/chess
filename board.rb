@@ -43,7 +43,8 @@ class Board
 		@pieces["d1"] = Queen.new
 		@pieces["e8"] = King.new
 		@pieces["e1"] = King.new
-
+		
+		self
 	end
 
 	def [] coordinate
