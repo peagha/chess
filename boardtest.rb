@@ -53,10 +53,12 @@ class BoardTest < MiniTest::Test
 	end
 
 	def test_piece_team
-		white_pawn = Pawn.white
-		assert_equal :white, white_pawn.team
+		[Pawn, Rook, Bishop, King, Queen, Horse].each do |piece_class|
+			white_piece = piece_class.white
+			assert_equal :white, white_piece.team
 		
-		black_pawn = Pawn.black
-		assert_equal :black, black_pawn.team
+			black_piece = piece_class.black
+			assert_equal :black, black_piece.team
+		end
 	end
 end
