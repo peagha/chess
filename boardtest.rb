@@ -56,4 +56,9 @@ class BoardTest < MiniTest::Test
 			end
 		end
 	end
+
+	def test_setup_return_self
+		board = Board.new
+		assert_equal board, board.setup
+	end
 end
