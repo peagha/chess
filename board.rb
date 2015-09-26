@@ -11,8 +11,6 @@ class Board
 
 	def initialize
 		@pieces = {}
-		@black_count = 0
-		@white_count = 0
 	end
 
 	def piece_count
@@ -20,13 +18,19 @@ class Board
 	end
 
 	def white_count
-		@pieces.count {|position, piece| piece.team == :white}
+		team_count :white	
 	end
 	
 	def black_count
-		@pieces.count {|position, piece| piece.team == :black}
+		team_count :black
 	end
-	
+
+	private
+	def team_count team
+		@pieces.count {|position, piece| piece.team == team}
+	end
+
+	public
 	def setup
 
 		{?2 => :white, 
