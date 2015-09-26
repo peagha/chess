@@ -49,7 +49,9 @@ class Board
 	end
 
 	def move_list coordinate
-		Set.new ["a3"]
+		file = coordinate[0]
+		rank = coordinate[1]
+		Set.new [file + rank.next]
 	end
 
 	def setup
