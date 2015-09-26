@@ -1,7 +1,7 @@
 class Piece
 
 	private
-	def initialize team = nil
+	def initialize team
 		@team = team
 	end
 
