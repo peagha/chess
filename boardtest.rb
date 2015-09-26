@@ -1,4 +1,5 @@
 require 'minitest/autorun'
+require 'set'
 require_relative 'board'
 
 class BoardTest < MiniTest::Test
@@ -76,5 +77,12 @@ class BoardTest < MiniTest::Test
 		assert_equal 1, board.white_count
 		assert_equal 2, board.black_count
 	end
-	
+
+	def test_move_list
+		board = Board.empty
+		board["a2"] = Pawn.white
+		
+		move_list = board.move_list "a2"
+		assert_equal Set.new(["a3"]), move_list
+	end
 end
