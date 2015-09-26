@@ -78,7 +78,7 @@ class BoardTest < MiniTest::Test
 		assert_equal 2, board.black_count
 	end
 
-	def test_move_list
+	def test_pawn_move_list
 		board = Board.empty
 		board["a2"] = Pawn.white
 		
@@ -86,7 +86,7 @@ class BoardTest < MiniTest::Test
 		assert_equal Set.new(["a3"]), move_list
 	end
 
-	def test_move_list_board_limit
+	def test_pawn_move_list_board_limit
 		board = Board.empty
 		board["a8"] = Pawn.white
 
