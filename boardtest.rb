@@ -16,7 +16,7 @@ class BoardTest < MiniTest::Test
 
 	def test_set_piece
 		board = Board.empty
-		board["a1"] = Pawn.new
+		board["a1"] = Pawn.white
 		assert_equal 1, board.piece_count
 	end
 
