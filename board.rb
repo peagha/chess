@@ -13,6 +13,10 @@ class Board
 		@pieces = {}
 	end
 
+	def self.empty
+		Board.new
+	end
+	
 	def piece_count
 		@pieces.count
 	end
@@ -24,13 +28,25 @@ class Board
 	def black_count
 		team_count :black
 	end
-
-	private
+	
 	def team_count team
 		@pieces.count {|position, piece| piece.team == team}
 	end
+	private :team_count
+	
+	def [] coordinate
+		@pieces[coordinate] 
+	end
 
-	public
+	def []= coordinate, value
+		@pieces[coordinate] = value
+	end
+
+	def move from, to
+		@pieces[to] = @pieces[from]
+		@pieces[from] = nil
+	end
+
 	def setup
 
 		{?2 => :white, 
@@ -61,20 +77,4 @@ class Board
 		self
 	end
 
-	def [] coordinate
-		@pieces[coordinate] 
-	end
-
-	def []= coordinate, value
-		@pieces[coordinate] = value
-	end
-
-	def move from, to
-		@pieces[to] = @pieces[from]
-		@pieces[from] = nil
-	end
-
-	def self.empty
-		Board.new
-	end
 end
