@@ -20,30 +20,32 @@ class Board
 	end
 
 	def setup
-		[2,7].each do |rank|
+
+		{?2 => :white, 
+		 ?7 => :black}.each do |rank, team|
 			('a'..'h').each do |file|
-				coordinate = file + rank.to_s
-				@pieces[coordinate] = Pawn.new
+				coordinate = file + rank
+				@pieces[coordinate] = Pawn.new(team)
 			end
 		end
-		
-		["a1", "h1", "a8", "h8"].each do |coordinate|
-			@pieces[coordinate] = Rook.new
+
+		files = {?a => Rook,
+			 ?b => Horse,
+			 ?c => Bishop,
+			 ?d => Queen,
+			 ?e => King,
+			 ?f => Bishop,
+			 ?g => Horse,
+			 ?h => Rook }
+
+		{?1 => :white, 
+		 ?8 => :black}.each do |rank, team|
+			files.each do |file, piece_class|
+				coordinate = file + rank
+				@pieces[coordinate] = piece_class.new(team)
+			end
 		end
 
-		["b1", "g1", "b8", "g8"].each do |coordinate|
-			@pieces[coordinate] = Horse.new
-		end
-
-		["c1", "f1", "c8", "f8"].each do |coordinate|
-			@pieces[coordinate] = Bishop.new
-		end
-
-		@pieces["d8"] = Queen.new
-		@pieces["d1"] = Queen.new
-		@pieces["e8"] = King.new
-		@pieces["e1"] = King.new
-		
 		self
 	end
 
