@@ -61,4 +61,20 @@ class BoardTest < MiniTest::Test
 			assert_equal :black, black_piece.team
 		end
 	end
+	
+	def test_piece_count
+		board = Board.empty
+		assert_equal 0, board.black_count
+		assert_equal 0, board.white_count
+		assert_equal 0, board.piece_count
+
+		board["a2"] = Pawn.white
+		board["a7"] = Pawn.black
+		board["b7"] = Pawn.black
+
+		assert_equal 3, board.piece_count
+		assert_equal 1, board.white_count
+		assert_equal 2, board.black_count
+	end
+	
 end
