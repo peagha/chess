@@ -1,3 +1,4 @@
+require 'set'
 require_relative "rook"
 require_relative "pawn"
 require_relative "horse"
@@ -45,6 +46,10 @@ class Board
 	def move from, to
 		@pieces[to] = @pieces[from]
 		@pieces[from] = nil
+	end
+
+	def move_list coordinate
+		Set.new ["a3"]
 	end
 
 	def setup
