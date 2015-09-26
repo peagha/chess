@@ -85,4 +85,12 @@ class BoardTest < MiniTest::Test
 		move_list = board.move_list "a2"
 		assert_equal Set.new(["a3"]), move_list
 	end
+
+	def test_move_list_board_limit
+		board = Board.empty
+		board["a8"] = Pawn.white
+
+		move_list = board.move_list "a8"
+		assert_equal Set.new, move_list
+	end
 end
