@@ -52,7 +52,7 @@ class Board
 		@pieces[from] = nil
 	end
 
-	def add_square_range_to_set set, start_square, file_step, rank_step
+	def add_square_range_to_set set, start_square, file_step, rank_step, limit = nil 
 		start_file = start_square[0].ord
 		start_rank = start_square[1].ord
 
@@ -60,6 +60,7 @@ class Board
 		next_rank = start_rank + rank_step
 		next_square = next_file.chr + next_rank.chr
 	
+		count = 0
 		while RANK_RANGE.member?(next_rank.chr) && 
 		      FILE_RANGE.member?(next_file.chr) &&
 		      self[next_square].nil?
@@ -68,6 +69,8 @@ class Board
 			next_file += file_step
 			next_rank += rank_step
 			next_square = next_file.chr + next_rank.chr
+
+			break if limit && (count += 1) <= limit
 		end
 	end
 	private :add_square_range_to_set
@@ -81,14 +84,10 @@ class Board
 		piece = self[square]
 
 		if piece.class == Pawn
-			direction = piece.team == :white ? 1 : -1
-			next_coord = file + (rank.ord + direction).chr
-
-			if rank < RANK_RANGE.last&& self[next_coord].nil?
-				return Set.new [next_coord]
-			else
-				return Set.new
-			end
+			move_list = Set.new
+			rank_step = piece.team == :white ? 1 : -1
+			add_square_range_to_set move_list, square, 0, rank_step, 1
+			return move_list
 		else
 			move_list = Set.new
 			add_square_range_to_set move_list, square, -1, 0
