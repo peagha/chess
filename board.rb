@@ -11,10 +11,8 @@ class Board
 
 	attr_accessor :white_count, :black_count
 
-	FIRST_RANK = ?1
-	LAST_RANK = ?8
-	FIRST_FILE = ?a
-	LAST_FILE = ?h
+	RANK_RANGE = ?1..?8
+	FILE_RANGE = ?a..?h
 
 	def initialize
 		@pieces = {}
@@ -55,9 +53,6 @@ class Board
 	end
 
 	def add_square_range_to_set set, start_square, file_step, rank_step
-		rank_range = ?1..?8
-		file_range = ?a..?h
-
 		start_file = start_square[0].ord
 		start_rank = start_square[1].ord
 
@@ -65,8 +60,8 @@ class Board
 		next_rank = start_rank + rank_step
 		next_square = next_file.chr + next_rank.chr
 	
-		while rank_range.member?(next_rank.chr) && 
-		      file_range.member?(next_file.chr) &&
+		while RANK_RANGE.member?(next_rank.chr) && 
+		      FILE_RANGE.member?(next_file.chr) &&
 		      self[next_square].nil?
 
 			set.add next_square
@@ -75,8 +70,7 @@ class Board
 			next_square = next_file.chr + next_rank.chr
 		end
 	end
-
-
+	private :add_square_range_to_set
 
 	def move_list square
 		message = "Can't list possible moves on empty square"  
@@ -90,7 +84,7 @@ class Board
 			direction = piece.team == :white ? 1 : -1
 			next_coord = file + (rank.ord + direction).chr
 
-			if rank < LAST_RANK && self[next_coord].nil?
+			if rank < RANK_RANGE.last&& self[next_coord].nil?
 				return Set.new [next_coord]
 			else
 				return Set.new
