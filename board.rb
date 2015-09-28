@@ -36,12 +36,12 @@ class Board
 	end
 	private :team_count
 	
-	def [] coordinate
-		@pieces[coordinate] 
+	def [] square
+		@pieces[square] 
 	end
 
-	def []= coordinate, value
-		@pieces[coordinate] = value
+	def []= square, piece 
+		@pieces[square] = piece
 	end
 
 	def move from, to
@@ -49,14 +49,14 @@ class Board
 		@pieces[from] = nil
 	end
 
-	def move_list coordinate
+	def move_list square
 		message = "Can't list possible moves on empty square"  
-		raise EmptySquareError, message if self[coordinate].nil? 
+		raise EmptySquareError, message if self[square].nil? 
 
-		file = coordinate[0]
-		rank = coordinate[1]
+		file = square[0]
+		rank = square[1]
 
-		piece = self[coordinate]
+		piece = self[square]
 		direction = piece.team == :white ? 1 : -1
 		next_coord = file + (rank.ord + direction).chr
 
@@ -72,8 +72,8 @@ class Board
 		{?2 => :white, 
 		 ?7 => :black}.each do |rank, team|
 			('a'..'h').each do |file|
-				coordinate = file + rank
-				@pieces[coordinate] = Pawn.new(team)
+				square = file + rank
+				@pieces[square] = Pawn.new(team)
 			end
 		end
 
@@ -89,8 +89,8 @@ class Board
 		{?1 => :white, 
 		 ?8 => :black}.each do |rank, team|
 			files.each do |file, piece_class|
-				coordinate = file + rank
-				@pieces[coordinate] = piece_class.new(team)
+				square = file + rank
+				@pieces[square] = piece_class.new(team)
 			end
 		end
 
