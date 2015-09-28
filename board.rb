@@ -51,8 +51,9 @@ class Board
 	def move_list coordinate
 		file = coordinate[0]
 		rank = coordinate[1]
-		if rank < ?8
-			Set.new [file + rank.next]
+		next_coord = file + rank.next
+		if rank < ?8 && self[next_coord].nil?
+			Set.new [next_coord]
 		else
 			Set.new
 		end
