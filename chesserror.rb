@@ -1,0 +1,2 @@
+class EmptySquareError < StandardError
+end

@@ -5,6 +5,7 @@ require_relative "horse"
 require_relative "bishop"
 require_relative "queen"
 require_relative "king"
+require_relative "chesserror"
 
 class Board
 
@@ -49,6 +50,9 @@ class Board
 	end
 
 	def move_list coordinate
+		message = "Can't list possible moves on empty square"  
+		raise EmptySquareError, message if self[coordinate].nil? 
+
 		file = coordinate[0]
 		rank = coordinate[1]
 
