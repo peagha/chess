@@ -53,11 +53,8 @@ class Board
 	end
 
 	def add_square_range_to_set set, start_square, file_step, rank_step, limit = nil 
-		start_file = start_square[0].ord
-		start_rank = start_square[1].ord
-
-		next_file = start_file + file_step
-		next_rank = start_rank + rank_step
+		next_file = start_square[0].ord + file_step
+		next_rank = start_square[1].ord + rank_step
 		next_square = next_file.chr + next_rank.chr
 	
 		count = 0
