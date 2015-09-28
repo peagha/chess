@@ -114,7 +114,7 @@ class BoardTest < MiniTest::Test
 	def test_empty_square_move_list
 		board = Board.empty
 		assert_raises(EmptySquareError) do
-			board["a1"].move_list
+			board.move_list "a1"
 		end
 	end
 
