@@ -9,8 +9,8 @@ class BoardTest < MiniTest::Test
 		assert_equal 32, board.piece_count
 		[1,2,7,8].each do |rank|
 			('a'..'h').each do |file|
-				coordinate = file + rank.to_s
-				refute_nil board[coordinate], "#{coordinate} should have a piece"
+				square = file + rank.to_s
+				refute_nil board[square], "#{square} should have a piece"
 			end
 		end
 	end
@@ -42,8 +42,8 @@ class BoardTest < MiniTest::Test
 
 		(1..8).each do |rank|
 			('a'..'h').each do |file|
-				coordinate = file + rank.to_s
-				assert_nil board[coordinate], "#{coordinate} should be empty"
+				square = file + rank.to_s
+				assert_nil board[square], "#{square} should be empty"
 			end
 		end
 	end
