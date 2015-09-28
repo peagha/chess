@@ -9,11 +9,11 @@ class Piece
 	attr_reader :team
 
 	def self.white
-		Pawn.new :white
+		self.new :white
 	end
 
 	def self.black
-		Pawn.new :black
+		self.new :black
 	end
 
 end
