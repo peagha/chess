@@ -93,4 +93,13 @@ class BoardTest < MiniTest::Test
 		move_list = board.move_list "a8"
 		assert_equal Set.new, move_list
 	end
+
+	def test_pawn_move_list_ocupied_square
+		board = Board.empty
+		board["a6"] = Pawn.white
+		board["a5"] = Pawn.black
+	
+		move_list = board.move_list "a5"
+		assert_equal Set.new, move_list
+	end
 end
