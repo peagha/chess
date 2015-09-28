@@ -111,4 +111,11 @@ class BoardTest < MiniTest::Test
 		assert_equal Set.new(["a6"]), move_list
 	end
 
+	def test_empty_square_move_list
+		board = Board.empty
+		assert_raises(EmptySquareError) do
+			board["a1"].move_list
+		end
+	end
+
 end
