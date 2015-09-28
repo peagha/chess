@@ -54,6 +54,30 @@ class Board
 		@pieces[from] = nil
 	end
 
+	def add_square_range_to_set set, start_square, file_step, rank_step
+		rank_range = ?1..?8
+		file_range = ?a..?h
+
+		start_file = start_square[0].ord
+		start_rank = start_square[1].ord
+
+		next_file = start_file + file_step
+		next_rank = start_rank + rank_step
+		next_square = next_file.chr + next_rank.chr
+	
+		while rank_range.member?(next_rank.chr) && 
+		      file_range.member?(next_file.chr) &&
+		      self[next_square].nil?
+
+			set.add next_square
+			next_file += file_step
+			next_rank += rank_step
+			next_square = next_file.chr + next_rank.chr
+		end
+	end
+
+
+
 	def move_list square
 		message = "Can't list possible moves on empty square"  
 		raise EmptySquareError, message if self[square].nil? 
@@ -73,30 +97,10 @@ class Board
 			end
 		else
 			move_list = Set.new
-			rank.next.upto(LAST_RANK).each do |next_rank|
-				next_square = file + next_rank
-				break unless self[next_square].nil?
-				move_list.add next_square
-			end
-
-			rank.ord.pred.downto(FIRST_RANK.ord) do |prev_rank|
-				prev_square = file + prev_rank.chr
-				break unless self[prev_square].nil?
-				move_list.add prev_square
-			end
-
-			file.next.upto(LAST_FILE).each do |next_file|
-				next_square = next_file + rank
-				break unless self[next_square].nil?
-				move_list.add next_square
-			end
-
-			file.ord.pred.downto(FIRST_FILE.ord) do |prev_file|
-				prev_square = prev_file.chr + rank
-				break unless self[prev_square].nil?
-				move_list.add prev_square
-			end
-
+			add_square_range_to_set move_list, square, -1, 0
+			add_square_range_to_set move_list, square, 1, 0
+			add_square_range_to_set move_list, square, 0, 1
+			add_square_range_to_set move_list, square, 0, -1
 			return move_list
 		end
 	end
