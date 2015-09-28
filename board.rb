@@ -55,15 +55,44 @@ class Board
 
 		file = square[0]
 		rank = square[1]
-
 		piece = self[square]
-		direction = piece.team == :white ? 1 : -1
-		next_coord = file + (rank.ord + direction).chr
 
-		if rank < ?8 && self[next_coord].nil?
-			Set.new [next_coord]
+		if piece.class == Pawn
+			direction = piece.team == :white ? 1 : -1
+			next_coord = file + (rank.ord + direction).chr
+
+			if rank < ?8 && self[next_coord].nil?
+				return Set.new [next_coord]
+			else
+				return Set.new
+			end
 		else
-			Set.new
+			move_list = Set.new
+			rank.next.upto(?8).each do |next_rank|
+				next_square = file + next_rank
+				break unless self[next_square].nil?
+				move_list.add next_square
+			end
+
+			rank.ord.pred.downto(?1.ord) do |prev_rank|
+				prev_square = file + prev_rank.chr
+				break unless self[prev_square].nil?
+				move_list.add prev_square
+			end
+
+			file.next.upto(?h).each do |next_file|
+				next_square = next_file + rank
+				break unless self[next_square].nil?
+				move_list.add next_square
+			end
+
+			file.ord.pred.downto(?a.ord) do |prev_file|
+				prev_square = prev_file.chr + rank
+				break unless self[prev_square].nil?
+				move_list.add prev_square
+			end
+
+			return move_list
 		end
 	end
 
