@@ -84,7 +84,8 @@ class Board
 			parameter_list = [[0, rank_step, 1]]
 		when Rook; parameter_list = [[-1,0],[1,0],[0,1],[0,-1]]
 		when Bishop; parameter_list = [[-1,-1],[1,1],[-1,1],[1,-1]]
-		when King; parameter_list = [[-1,-1,1],[1,1,1],[-1,1,1],[1,-1,1],[-1,0,1],[1,0,1],[0,1,1],[0,-1,1]]
+		when King; parameter_list = [[-1,-1,1],[1,1,1],[-1,1,1],[1,-1,1],
+					     [-1,0,1],[1,0,1],[0,1,1],[0,-1,1]]
 		end
 
 		move_list = Set.new
