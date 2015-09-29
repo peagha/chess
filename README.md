@@ -1,2 +1,2 @@
 # chess
-Simple chess ruleset implemente in ruby
+Simple chess ruleset implemente in ruby using TDD
