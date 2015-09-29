@@ -84,17 +84,17 @@ class Board
 		when Pawn
 			rank_step = piece.team == :white ? 1 : -1
 			parameter_list = [[0, rank_step]]
-			limit = 1
 		when Rook; parameter_list = updown_leftright_steps 
 		when Bishop; parameter_list = diagonal_steps
 		when King; parameter_list = updown_leftright_steps + diagonal_steps
-			limit = 1
 		when Queen; parameter_list = updown_leftright_steps + diagonal_steps
+		when Horse 
+			parameter_list = [[2,1],[1,2],[-2,1],[-1,2],[2,-1],[1,-2],[-2,-1],[-1,-2]]
 		end
 
 		move_list = Set.new
 		parameter_list.each do |p| 
-			add_square_range_to_set move_list, square, *p, limit
+			add_square_range_to_set move_list, square, *p, piece.move_limit
 		end
 		move_list
 	end

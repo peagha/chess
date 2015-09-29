@@ -6,7 +6,7 @@ class Piece
 	end
 
 	public
-	attr_reader :team
+	attr_reader :team, :move_limit
 
 	def self.white
 		self.new :white
