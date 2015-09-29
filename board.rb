@@ -78,19 +78,22 @@ class Board
 
 		piece = self[square]
 
+		diagonal_steps = [[-1,-1],[1,1],[-1,1],[1,-1]]
+		updown_leftright_steps = [[-1,0],[1,0],[0,1],[0,-1]]
 		case piece
 		when Pawn
 			rank_step = piece.team == :white ? 1 : -1
-			parameter_list = [[0, rank_step, 1]]
-		when Rook; parameter_list = [[-1,0],[1,0],[0,1],[0,-1]]
-		when Bishop; parameter_list = [[-1,-1],[1,1],[-1,1],[1,-1]]
-		when King; parameter_list = [[-1,-1,1],[1,1,1],[-1,1,1],[1,-1,1],
-					     [-1,0,1],[1,0,1],[0,1,1],[0,-1,1]]
+			parameter_list = [[0, rank_step]]
+			limit = 1
+		when Rook; parameter_list = updown_leftright_steps 
+		when Bishop; parameter_list = diagonal_steps
+		when King; parameter_list = updown_leftright_steps + diagonal_steps
+			limit = 1
 		end
 
 		move_list = Set.new
 		parameter_list.each do |p| 
-			add_square_range_to_set move_list, square, *p
+			add_square_range_to_set move_list, square, *p, limit
 		end
 		move_list
 	end
