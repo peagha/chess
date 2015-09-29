@@ -80,19 +80,17 @@ class Board
 		rank = square[1]
 		piece = self[square]
 
+		move_list = Set.new
 		if piece.class == Pawn
-			move_list = Set.new
 			rank_step = piece.team == :white ? 1 : -1
 			add_square_range_to_set move_list, square, 0, rank_step, 1
-			return move_list
-		else
-			move_list = Set.new
+		elsif piece.class == Rook
 			add_square_range_to_set move_list, square, -1, 0
 			add_square_range_to_set move_list, square, 1, 0
 			add_square_range_to_set move_list, square, 0, 1
 			add_square_range_to_set move_list, square, 0, -1
-			return move_list
 		end
+		move_list
 	end
 
 	def setup
