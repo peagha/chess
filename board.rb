@@ -76,24 +76,19 @@ class Board
 		message = "Can't list possible moves on empty square"  
 		raise EmptySquareError, message if self[square].nil? 
 
-		file = square[0]
-		rank = square[1]
 		piece = self[square]
 
-		move_list = Set.new
-		if piece.class == Pawn
+		case piece
+		when Pawn
 			rank_step = piece.team == :white ? 1 : -1
-			add_square_range_to_set move_list, square, 0, rank_step, 1
-		elsif piece.class == Rook
-			add_square_range_to_set move_list, square, -1, 0
-			add_square_range_to_set move_list, square, 1, 0
-			add_square_range_to_set move_list, square, 0, 1
-			add_square_range_to_set move_list, square, 0, -1
-		elsif piece.class == Bishop 
-			add_square_range_to_set move_list, square, -1, -1
-			add_square_range_to_set move_list, square, 1, 1
-			add_square_range_to_set move_list, square, -1, 1
-			add_square_range_to_set move_list, square, 1, -1
+			parameter_list = [[0, rank_step, 1]]
+		when Rook; parameter_list = [[-1,0],[1,0],[0,1],[0,-1]]
+		when Bishop; parameter_list = [[-1,-1],[1,1],[-1,1],[1,-1]]
+		end
+
+		move_list = Set.new
+		parameter_list.each do |p| 
+			add_square_range_to_set move_list, square, *p
 		end
 		move_list
 	end
