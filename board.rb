@@ -89,6 +89,11 @@ class Board
 			add_square_range_to_set move_list, square, 1, 0
 			add_square_range_to_set move_list, square, 0, 1
 			add_square_range_to_set move_list, square, 0, -1
+		elsif piece.class == Bishop 
+			add_square_range_to_set move_list, square, -1, -1
+			add_square_range_to_set move_list, square, 1, 1
+			add_square_range_to_set move_list, square, -1, 1
+			add_square_range_to_set move_list, square, 1, -1
 		end
 		move_list
 	end
