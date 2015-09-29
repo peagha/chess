@@ -133,4 +133,12 @@ class BoardTest < MiniTest::Test
 		expected = Set.new %w{ a8 b7 c6 e4 f3 g2 h1 a2 b3 c4 e6 f7 g8 }
 		assert_equal expected, move_list 
 	end
+	
+	def test_king_move_list
+		board = Board.empty
+		board["d5"] = King.white
+		move_list = board.move_list "d5"
+		expected = Set.new %w{ e4 e5 e6 d4 d6 c4 c5 c6 }
+		assert_equal expected, move_list 
+	end
 end
