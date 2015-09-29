@@ -89,6 +89,7 @@ class Board
 		when Bishop; parameter_list = diagonal_steps
 		when King; parameter_list = updown_leftright_steps + diagonal_steps
 			limit = 1
+		when Queen; parameter_list = updown_leftright_steps + diagonal_steps
 		end
 
 		move_list = Set.new
