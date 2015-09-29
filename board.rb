@@ -78,18 +78,26 @@ class Board
 
 		piece = self[square]
 
-		diagonal_steps = [[-1,-1],[1,1],[-1,1],[1,-1]]
-		updown_leftright_steps = [[-1,0],[1,0],[0,1],[0,-1]]
+		up = [0,1]
+		down = [0,-1]
+		left = [-1,0]
+		right = [1,0]
+		straight_steps = [up, down, left, right]
+
+		left_up = [-1,1]
+		right_up = [1,1]
+		left_down = [-1,-1]
+		right_down = [1,-1]
+
+		diagonal_steps = [left_up, right_up, left_down, right_down]
+		
 		case piece
-		when Pawn
-			rank_step = piece.team == :white ? 1 : -1
-			parameter_list = [[0, rank_step]]
-		when Rook; parameter_list = updown_leftright_steps 
+		when Pawn; parameter_list = piece.team == :white ? [up] : [down]
+		when Rook; parameter_list = straight_steps 
 		when Bishop; parameter_list = diagonal_steps
-		when King; parameter_list = updown_leftright_steps + diagonal_steps
-		when Queen; parameter_list = updown_leftright_steps + diagonal_steps
-		when Horse 
-			parameter_list = [[2,1],[1,2],[-2,1],[-1,2],[2,-1],[1,-2],[-2,-1],[-1,-2]]
+		when King; parameter_list = straight_steps + diagonal_steps
+		when Queen; parameter_list = straight_steps + diagonal_steps
+		when Horse; parameter_list = [[2,1],[1,2],[-2,1],[-1,2],[2,-1],[1,-2],[-2,-1],[-1,-2]]
 		end
 
 		move_list = Set.new
