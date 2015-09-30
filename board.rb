@@ -78,30 +78,8 @@ class Board
 
 		piece = self[square]
 
-		up = [0,1]
-		down = [0,-1]
-		left = [-1,0]
-		right = [1,0]
-		straight_steps = [up, down, left, right]
-
-		left_up = [-1,1]
-		right_up = [1,1]
-		left_down = [-1,-1]
-		right_down = [1,-1]
-
-		diagonal_steps = [left_up, right_up, left_down, right_down]
-		
-		case piece
-		when Pawn; parameter_list = piece.team == :white ? [up] : [down]
-		when Rook; parameter_list = straight_steps 
-		when Bishop; parameter_list = diagonal_steps
-		when King; parameter_list = straight_steps + diagonal_steps
-		when Queen; parameter_list = straight_steps + diagonal_steps
-		when Horse; parameter_list = [[2,1],[1,2],[-2,1],[-1,2],[2,-1],[1,-2],[-2,-1],[-1,-2]]
-		end
-
 		move_list = Set.new
-		parameter_list.each do |p| 
+		piece.move_steps.each do |p| 
 			add_square_range_to_set move_list, square, *p, piece.move_limit
 		end
 		move_list
