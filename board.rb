@@ -77,10 +77,9 @@ class Board
 		raise EmptySquareError, message if self[square].nil? 
 
 		piece = self[square]
-
 		move_list = Set.new
-		piece.move_steps.each do |p| 
-			add_square_range_to_set move_list, square, *p, piece.move_limit
+		piece.move_steps.each do |move_step| 
+			add_square_range_to_set move_list, square, *move_step, piece.move_limit
 		end
 		move_list
 	end
