@@ -78,14 +78,6 @@ class BoardTest < MiniTest::Test
 		assert_equal 2, board.black_count
 	end
 
-	def test_pawn_move_list
-		board = Board.empty
-		board["a2"] = Pawn.white
-		
-		move_list = board.move_list "a2"
-		assert_equal Set.new(["a3"]), move_list
-	end
-
 	def test_pawn_move_list_board_limit
 		board = Board.empty
 		board["a8"] = Pawn.white
@@ -103,14 +95,6 @@ class BoardTest < MiniTest::Test
 		assert_equal Set.new, move_list
 	end
 
-	def test_black_pawn_move_list
-		board = Board.empty
-		board["a7"] = Pawn.black
-		
-		move_list = board.move_list "a7"
-		assert_equal Set.new(["a6"]), move_list
-	end
-
 	def test_empty_square_move_list
 		board = Board.empty
 		assert_raises(EmptySquareError) do
@@ -118,48 +102,24 @@ class BoardTest < MiniTest::Test
 		end
 	end
 
-	def test_rook_move_list
-		board = Board.empty
-		board["d5"] = Rook.black
-		move_list = board.move_list "d5"
-		expected = Set.new %w{ a5 b5 c5 e5 f5 g5 h5 d1 d2 d3 d4 d6 d7 d8 }
-		assert_equal expected, move_list 
-	end
-	
-	def test_bishop_move_list
-		board = Board.empty
-		board["d5"] = Bishop.black
-		move_list = board.move_list "d5"
-		expected = Set.new %w{ a8 b7 c6 e4 f3 g2 h1 a2 b3 c4 e6 f7 g8 }
-		assert_equal expected, move_list 
-	end
-	
-	def test_king_move_list
-		board = Board.empty
-		board["d5"] = King.white
-		move_list = board.move_list "d5"
-		expected = Set.new %w{ e4 e5 e6 d4 d6 c4 c5 c6 }
-		assert_equal expected, move_list 
-	end
-	
-	def test_queen_move_list
-		board = Board.empty
-		board["d5"] = Queen.white
-		move_list = board.move_list "d5"
-		expected = Set.new %w{ a5 b5 c5 e5 f5 g5 h5 
-				       d1 d2 d3 d4 d6 d7 d8 
-				       e6 f7 g8 
-				       c6 b7 a8 
-				       c4 b3 a2 
-				       e4 f3 g2 h1 }
-		assert_equal expected, move_list 
-	end
-	
-	def test_horse_move_list
-		board = Board.empty
-		board["d5"] = Horse.black
-		move_list = board.move_list "d5"
-		expected = Set.new %w{ c3 b4 b6 c7 e7 f6 f4 e3 }
-		assert_equal expected, move_list 
+	def test_piece_move_list
+		hash = { Horse.black => %w{ c3 b4 b6 c7 e7 f6 f4 e3 },
+			 Queen.white => %w{ a5 b5 c5 e5 f5 g5 h5 
+				            d1 d2 d3 d4 d6 d7 d8 
+					    e6 f7 g8 
+					    c6 b7 a8 
+				       	    c4 b3 a2 
+				       	    e4 f3 g2 h1 },
+			 King.white => %w{ e4 e5 e6 d4 d6 c4 c5 c6 },
+			 Bishop.black => %w{ a8 b7 c6 e4 f3 g2 h1 a2 b3 c4 e6 f7 g8 },
+			 Rook.black => %w{ a5 b5 c5 e5 f5 g5 h5 d1 d2 d3 d4 d6 d7 d8 },
+			 Pawn.black => ["d4"],
+			 Pawn.white => ["d6"]}
+
+		hash.each do |piece, expected|
+			board = Board.empty
+			board["d5"] = piece 
+			assert_equal Set.new(expected), board.move_list("d5"), "#{piece.class}" 
+		end
 	end
 end
