@@ -93,6 +93,29 @@ class Board
 		move_list
 	end
 
+	def capture_list square
+		piece = self[square]
+		capture_list = Set.new
+		[[1,1],[-1,1]].each do |move_step| 
+			add_capture_range_to_set capture_list, square, *move_step, piece.move_limit
+		end
+		capture_list
+	end
+	
+	def add_capture_range_to_set set, start_square, file_step, rank_step, limit = nil 
+		step_square(start_square, 
+			    file_step, 
+			    rank_step).each_with_index do |next_square, index|
+			break if limit && limit <= index 
+			if @pieces[next_square]
+				set.add next_square
+				break
+			end
+		end
+	end
+	
+	private :add_square_range_to_set
+
 	def setup
 
 		{?2 => :white, 
