@@ -52,22 +52,31 @@ class Board
 		@pieces[from] = nil
 	end
 
-	def add_square_range_to_set set, start_square, file_step, rank_step, limit = nil 
+
+	def step_square start_square, file_step, rank_step
 		next_file = start_square[0].ord + file_step
 		next_rank = start_square[1].ord + rank_step
 		next_square = next_file.chr + next_rank.chr
+		
+		Enumerator.new do |y|
+			while RANK_RANGE.member?(next_rank.chr) && 
+			      FILE_RANGE.member?(next_file.chr)
+				y << next_square
+				next_file += file_step
+				next_rank += rank_step
+				next_square = next_file.chr + next_rank.chr
+			end
+		end
+	end
+	private :step_square
 	
-		count = 0
-		while RANK_RANGE.member?(next_rank.chr) && 
-		      FILE_RANGE.member?(next_file.chr) &&
-		      self[next_square].nil?
-
+	def add_square_range_to_set set, start_square, file_step, rank_step, limit = nil 
+		step_square(start_square, 
+			    file_step, 
+			    rank_step).each_with_index do |next_square, index|
+			break if @pieces[next_square]
+			break if limit && limit <= index 
 			set.add next_square
-			next_file += file_step
-			next_rank += rank_step
-			next_square = next_file.chr + next_rank.chr
-
-			break if limit && (count += 1) <= limit
 		end
 	end
 	private :add_square_range_to_set
