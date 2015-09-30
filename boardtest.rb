@@ -122,4 +122,14 @@ class BoardTest < MiniTest::Test
 			assert_equal Set.new(expected), board.move_list("d5"), "#{piece.class}" 
 		end
 	end
+
+	def test_piece_capture_list
+		board = Board.empty
+		board["b2"] = Pawn.white
+	
+		board["c3"] = Pawn.black
+		board["a3"] = Pawn.black
+
+		assert_equal Set.new(["c3", "a3"]), board.capture_list("b2")
+	end
 end
