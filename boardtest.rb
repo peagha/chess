@@ -123,7 +123,7 @@ class BoardTest < MiniTest::Test
 		end
 	end
 
-	def test_piece_capture_list
+	def test_pawn_capture_list
 		board = Board.empty
 		board["b2"] = Pawn.white
 	
@@ -131,5 +131,17 @@ class BoardTest < MiniTest::Test
 		board["a3"] = Pawn.black
 
 		assert_equal Set.new(["c3", "a3"]), board.capture_list("b2")
+	end
+	
+	def test_bishop_capture_list
+		board = Board.empty
+		board["d5"] = King.white
+	
+		board["a8"] = Pawn.black
+		board["a2"] = Pawn.black
+		board["g8"] = Pawn.black
+		board["h1"] = Pawn.black
+
+		assert_equal Set.new( %w{ a8 a2 g8 h1 }), board.capture_list("d5")
 	end
 end
