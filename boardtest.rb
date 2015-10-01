@@ -144,4 +144,11 @@ class BoardTest < MiniTest::Test
 
 		assert_equal Set.new( %w{ a8 a2 g8 h1 }), board.capture_list("d5")
 	end
+
+	def test_board_hash_setup
+		board = Board.new({ "a1" => Pawn.white, "a2" => Pawn.black, "a3" => Pawn.white })
+		assert_equal Pawn.white, board["a1"]
+		assert_equal Pawn.black, board["a2"]
+		assert_equal Pawn.white, board["a3"]
+	end
 end
