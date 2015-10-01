@@ -15,7 +15,10 @@ class Board
 	FILE_RANGE = ?a..?h
 
 	def initialize pieces = nil
-		@pieces = pieces || {}
+		@pieces = {}
+		pieces.each do |square, piece|
+			@pieces[square.to_s] = piece
+		end if pieces
 	end
 
 	def self.empty
@@ -40,11 +43,11 @@ class Board
 	private :team_count
 	
 	def [] square
-		@pieces[square] 
+		@pieces[square.to_s] 
 	end
 
 	def []= square, piece 
-		@pieces[square] = piece
+		@pieces[square.to_s] = piece
 	end
 
 	def move from, to
