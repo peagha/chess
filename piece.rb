@@ -27,4 +27,9 @@ class Piece
 		self.new :black
 	end
 
+	def == other
+		if other.respond_to? :team
+			self.class == other.class && self.team == other.team
+		end
+	end
 end
