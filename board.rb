@@ -114,8 +114,7 @@ class Board
 			end
 		end
 	end
-	
-	private :add_square_range_to_set
+	private :add_capture_range_to_set
 
 	def setup
 
