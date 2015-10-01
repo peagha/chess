@@ -156,5 +156,6 @@ class BoardTest < MiniTest::Test
 		assert_equal Pawn.white, Pawn.white
 		refute_equal Pawn.black, Pawn.white
 		refute_equal King.black, Queen.black
+		refute_equal King.black, nil 
 	end
 end
