@@ -151,4 +151,10 @@ class BoardTest < MiniTest::Test
 	#	assert_equal Pawn.black, board["a2"]
 	#	assert_equal Pawn.white, board["a3"]
 	#end
+	
+	def test_piece_equality
+		assert_equal Pawn.white, Pawn.white
+		refute_equal Pawn.black, Pawn.white
+		refute_equal King.black, Queen.black
+	end
 end
