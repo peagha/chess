@@ -124,29 +124,30 @@ class BoardTest < MiniTest::Test
 	end
 
 	def test_pawn_capture_list
-		board = Board.empty
-		board["b2"] = Pawn.white
-	
-		board["c3"] = Pawn.black
-		board["a3"] = Pawn.black
+		board = Board.new({
+			"b2" => Pawn.white,
+			"c3" => Pawn.black,
+			"a3" => Pawn.black })
 
 		assert_equal Set.new(["c3", "a3"]), board.capture_list("b2")
 	end
 	
 	def test_bishop_capture_list
-		board = Board.empty
-		board["d5"] = Bishop.white
-	
-		board["a8"] = Pawn.black
-		board["a2"] = Pawn.black
-		board["g8"] = Pawn.black
-		board["h1"] = Pawn.black
+		board = Board.new({
+			"d5" => Bishop.white,
+			"a8" => Pawn.black,
+			"a2" => Pawn.black,
+			"g8" => Pawn.black,
+			"h1" => Pawn.black }) 
 
 		assert_equal Set.new( %w{ a8 a2 g8 h1 }), board.capture_list("d5")
 	end
 
 	def test_board_hash_setup
-		board = Board.new({ "a1" => Pawn.white, "a2" => Pawn.black, "a3" => Pawn.white })
+		board = Board.new({ 
+			"a1" => Pawn.white, 
+			"a2" => Pawn.black, 
+			"a3" => Pawn.white })
 		assert_equal Pawn.white, board["a1"]
 		assert_equal Pawn.black, board["a2"]
 		assert_equal Pawn.white, board["a3"]
