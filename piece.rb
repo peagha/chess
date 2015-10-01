@@ -17,7 +17,7 @@ class Piece
 	end
 
 	public
-	attr_reader :team, :move_limit, :move_steps
+	attr_reader :team, :move_limit, :move_steps, :capture_steps
 
 	def self.white
 		self.new :white

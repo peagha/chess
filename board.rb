@@ -96,7 +96,8 @@ class Board
 	def capture_list square
 		piece = self[square]
 		capture_list = Set.new
-		[[1,1],[-1,1]].each do |move_step| 
+		
+		piece.capture_steps.each do |move_step| 
 			add_capture_range_to_set capture_list, square, *move_step, piece.move_limit
 		end
 		capture_list
