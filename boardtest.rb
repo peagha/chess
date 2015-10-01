@@ -159,4 +159,16 @@ class BoardTest < MiniTest::Test
 		refute_equal King.black, Queen.black
 		refute_equal King.black, nil 
 	end
+
+	def test_symbol_square
+		board = Board.new({
+			"a1" => Pawn.white,
+			:a2 => Pawn.white })
+		board[:a3] = Pawn.white
+		assert_equal Pawn.white, board["a1"]
+		assert_equal Pawn.white, board["a2"]
+		assert_equal Pawn.white, board["a3"]
+		assert_equal Pawn.white, board[:a1]
+	end
+
 end
