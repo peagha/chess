@@ -14,8 +14,8 @@ class Board
 	RANK_RANGE = ?1..?8
 	FILE_RANGE = ?a..?h
 
-	def initialize
-		@pieces = {}
+	def initialize pieces = nil
+		@pieces = pieces || {}
 	end
 
 	def self.empty
