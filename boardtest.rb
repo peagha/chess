@@ -135,7 +135,7 @@ class BoardTest < MiniTest::Test
 	
 	def test_bishop_capture_list
 		board = Board.empty
-		board["d5"] = King.white
+		board["d5"] = Bishop.white
 	
 		board["a8"] = Pawn.black
 		board["a2"] = Pawn.black
