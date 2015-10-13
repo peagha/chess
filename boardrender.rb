@@ -7,17 +7,16 @@ class BoardRender
 		output = "|"
 		Board::FILE_RANGE.each do |file|
 			square = file + rank
-			render = self.class.render_piece(@board[square])
+			render = render_square square 
 			output += render + " |"
 		end
 		output
 	end
 
-	def self.render_piece piece
+	def render_square square
+		piece = @board[square]
 		return "  " if piece.nil?
-
-		piece.team == :black ? 
-			"*" + piece.piece_char :
-			piece.piece_char
+		prefix = piece.team == :black ? "*" : " " 
+		prefix + piece.piece_char
 	end
 end
