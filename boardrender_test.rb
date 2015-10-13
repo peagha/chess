@@ -17,4 +17,27 @@ class BoardRenderTest < MiniTest::Test
 		renderer = BoardRender.new board
 		assert_equal expected_row, renderer.render_rank(?1)
 	end
+
+	def test_render_board
+		expected = 
+			"|*R |*N |*B |*Q |*K |*B |*N |*R |\n" +
+			"---------------------------------\n" +
+			"|*P |*P |*P |*P |*P |*P |*P |*P |\n" +
+			"---------------------------------\n" +
+			"|   |   |   |   |   |   |   |   |\n" +
+			"---------------------------------\n" +
+			"|   |   |   |   |   |   |   |   |\n" +
+			"---------------------------------\n" +
+			"|   |   |   |   |   |   |   |   |\n" +
+			"---------------------------------\n" +
+			"|   |   |   |   |   |   |   |   |\n" +
+			"---------------------------------\n" +
+			"| P | P | P | P | P | P | P | P |\n" +
+			"---------------------------------\n" +
+			"| R | N | B | Q | K | B | N | R |\n"
+		board = Board.new.setup
+		renderer = BoardRender.new board
+		assert_equal expected, renderer.render
+	end
+		
 end
