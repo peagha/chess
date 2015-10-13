@@ -11,11 +11,9 @@ class BoardRenderTest < MiniTest::Test
 			Bishop => ?B,
 			Rook => ?R,
 			Pawn => ?P }
-		piece_render.each do |piece, render|
-			result = BoardRender.render_piece(piece.white)
-			assert_equal render, result
+		piece_render.each do |piece, piece_char|
+			assert_equal piece_char, BoardRender.render_piece(piece.white)
+			assert_equal ?* + piece_char, BoardRender.render_piece(piece.black)
 		end
-
-		assert_equal "*K", BoardRender.render_piece(King.black)
 	end
 end
