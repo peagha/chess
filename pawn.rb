@@ -5,6 +5,7 @@ class Pawn < Piece
 		@move_limit = 1
 		@move_steps = team == :white ? [UP] : [DOWN]
 		@capture_steps = [LEFT_UP, RIGHT_UP]
+		@piece_char = "P"
 		super
 	end
 end
