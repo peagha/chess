@@ -3,7 +3,11 @@ class BoardRender
 	end
 
 	def render_rank rank
-		"|   |   |   |   |   |   |   |   |"
+		output = ""
+		Board::FILE_RANGE.each do
+			output += "|   "
+		end
+		output += "|"
 	end
 
 	def self.render_piece piece
