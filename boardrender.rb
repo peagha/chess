@@ -1,5 +1,8 @@
 class BoardRender
 	def self.render_piece piece
-		piece.team == :black ? "*K" : "K"
+		piece_char = ?K
+		piece.team == :black ? 
+			"*" + piece_char :
+			piece_char
 	end
 end
