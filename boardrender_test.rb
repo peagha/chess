@@ -11,7 +11,7 @@ class BoardRenderTest < MiniTest::Test
 		assert_equal expected_row, renderer.render_rank(?1)
 	end
 
-	def test_render_empty_rank
+	def test_render_empty
 		expected_row = "|*R |   |   |   |   |   |   |   |"
 		board = Board.new({a1: Rook.black})
 		renderer = BoardRender.new board
