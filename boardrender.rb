@@ -1,5 +1,5 @@
 class BoardRender
 	def self.render_piece piece
-		"K"
+		piece.team == :black ? "*K" : "K"
 	end
 end
