@@ -19,4 +19,11 @@ class BoardRender
 		prefix = piece.team == :black ? "*" : " " 
 		prefix + piece.piece_char
 	end
+
+	def render
+		h_line = "---------------------------------\n"
+		Board::RANK_RANGE.reverse_each
+			.map {|rank| render_rank(rank) + "\n"}
+			.join h_line
+	end
 end
