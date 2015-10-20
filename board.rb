@@ -52,8 +52,14 @@ class Board
 	end
 
 	def move from, to
+		raise IlegalMoveError if !is_legal_move(from, to)
+
 		@pieces[to] = @pieces[from]
 		@pieces[from] = nil
+	end
+
+	def is_legal_move from, to
+		move_list(from).include?(to)
 	end
 	
 	def move_list square
