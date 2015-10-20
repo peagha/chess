@@ -97,12 +97,12 @@ class Board
 		capture_list = Set.new
 		
 		piece.capture_steps.each do |move_step| 
-			add_capture_range_to_set capture_list, square, *move_step, piece.move_limit
+			add_next_capture_to_set capture_list, square, *move_step, piece.move_limit
 		end
 		capture_list.collect! {|square| square.coordinate} 
 	end
 	
-	def add_capture_range_to_set set, start_square, file_step, rank_step, limit = nil 
+	def add_next_capture_to_set set, start_square, file_step, rank_step, limit = nil 
 		step_square(start_square, 
 			    file_step, 
 			    rank_step).each_with_index do |next_square, index|
@@ -113,7 +113,7 @@ class Board
 			end
 		end
 	end
-	private :add_capture_range_to_set
+	private :add_next_capture_to_set
 
 	def step_square start_square, file_step, rank_step
 		Square.new(start_square)
