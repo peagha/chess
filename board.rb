@@ -112,11 +112,11 @@ class Board
 	def step_square start_square, file_step, rank_step, limit = nil
 		Square.new(start_square)
 			.each_with_step(file_step, rank_step, limit)
-			.take_while {|square| self.include? square}
+			.take_while {|square| within_board? square}
 	end
 	private :step_square
 
-	def include? square
+	def within_board? square
 		RANK_RANGE.member?(square.rank) && 
 		FILE_RANGE.member?(square.file)
 	end
