@@ -32,4 +32,14 @@ class Square
 		(char.ord + step).chr
 	end
 	private :step_char
+
+	def each_with_step file_step, rank_step
+		next_square = self
+		Enumerator.new do |y|
+			while true
+				next_square = next_square.step(file_step, rank_step)
+				y <<  next_square
+			end
+		end
+	end
 end
