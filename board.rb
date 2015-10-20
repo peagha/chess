@@ -76,21 +76,17 @@ class Board
 		piece = self[square]
 		move_list = Set.new
 		piece.move_steps.each do |move_step| 
-			add_square_range_to_set move_list, square, *move_step, piece.move_limit
+			move_range = get_empty_squares square, *move_step, piece.move_limit
+			move_list.merge move_range
 		end
 		move_list.collect! {|square| square.coordinate}
 	end
 	
-	def add_square_range_to_set set, start_square, file_step, rank_step, limit = nil 
-		step_square(start_square, 
-			    file_step, 
-			    rank_step).each_with_index do |next_square, index|
-			break if self[next_square]
-			break if limit && limit <= index 
-			set.add next_square
-		end
+	def get_empty_squares  start_square, file_step, rank_step, limit = nil 
+		step_square(start_square, file_step, rank_step, limit)
+			.take_while {|square| self[square].nil? }
 	end
-	private :add_square_range_to_set
+	private :get_empty_squares
 
 	def capture_list square
 		piece = self[square]
