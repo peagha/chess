@@ -78,7 +78,7 @@ class Board
 		piece.move_steps.each do |move_step| 
 			add_square_range_to_set move_list, square, *move_step, piece.move_limit
 		end
-		move_list
+		move_list.collect! {|square| square.coordinate}
 	end
 	
 	def add_square_range_to_set set, start_square, file_step, rank_step, limit = nil 
@@ -99,7 +99,7 @@ class Board
 		piece.capture_steps.each do |move_step| 
 			add_capture_range_to_set capture_list, square, *move_step, piece.move_limit
 		end
-		capture_list
+		capture_list.collect! {|square| square.coordinate} 
 	end
 	
 	def add_capture_range_to_set set, start_square, file_step, rank_step, limit = nil 
@@ -119,7 +119,6 @@ class Board
 		Square.new(start_square)
 			.each_with_step(file_step, rank_step)
 			.take_while {|square| self.include? square}
-			.map {|square| square.coordinate} 
 	end
 	private :step_square
 
