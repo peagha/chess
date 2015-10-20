@@ -116,17 +116,14 @@ class Board
 	private :add_capture_range_to_set
 
 	def step_square start_square, file_step, rank_step
-		next_file = start_square[0].ord + file_step
-		next_rank = start_square[1].ord + rank_step
-		next_square = next_file.chr + next_rank.chr
+		start_square_obj = Square.new(start_square)
+		next_square = start_square_obj.step(file_step, rank_step) 
 		
 		Enumerator.new do |y|
-			while RANK_RANGE.member?(next_rank.chr) && 
-			      FILE_RANGE.member?(next_file.chr)
-				y << next_square
-				next_file += file_step
-				next_rank += rank_step
-				next_square = next_file.chr + next_rank.chr
+			while RANK_RANGE.member?(next_square.rank) && 
+			      FILE_RANGE.member?(next_square.file)
+				y << next_square.coordinate
+				next_square = next_square.step(file_step, rank_step)
 			end
 		end
 	end

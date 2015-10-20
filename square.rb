@@ -21,4 +21,15 @@ class Square
 	def hash
 		coordinate.hash
 	end
+
+	def step file_step, rank_step
+		new_file = step_char @file, file_step
+		new_rank = step_char @rank, rank_step
+		Square.new new_file + new_rank
+	end
+
+	def step_char char, step
+		(char.ord + step).chr
+	end
+	private :step_char
 end
