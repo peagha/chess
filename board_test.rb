@@ -34,6 +34,13 @@ class BoardTest < MiniTest::Test
 		refute_nil board["a3"]
 	end
 
+	def test_piece_move_empty_square
+		board = Board.empty
+		assert_raises EmptySquareError do
+			board.move "a1", "a2"
+		end
+	end
+
 	def test_piece_ilegal_move
 		board = Board.new.setup
 		assert_raises IlegalMoveError do
