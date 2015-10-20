@@ -97,28 +97,21 @@ class Board
 		capture_list = Set.new
 		
 		piece.capture_steps.each do |move_step| 
-			add_next_capture_to_set capture_list, square, *move_step, piece.move_limit
+			next_capture = find_next_capture square, *move_step, piece.move_limit
+			capture_list.add(next_capture) if next_capture
 		end
 		capture_list.collect! {|square| square.coordinate} 
 	end
 	
-	def add_next_capture_to_set set, start_square, file_step, rank_step, limit = nil 
-		next_capture = step_square(start_square, file_step, rank_step)
-			.each_with_index
-			.take_while { |square, index| within_limit limit, index  } 
-			.find { |(square)| self[square] }
-		set.add(next_capture[0]) if next_capture
+	def find_next_capture start_square, file_step, rank_step, limit  
+		step_square(start_square, file_step, rank_step, limit)
+			.find { |square| self[square] }
 	end
-	private :add_next_capture_to_set
+	private :find_next_capture
 
-	def within_limit limit, index
-		return true if limit.nil?
-		limit > index
-	end
-
-	def step_square start_square, file_step, rank_step
+	def step_square start_square, file_step, rank_step, limit = nil
 		Square.new(start_square)
-			.each_with_step(file_step, rank_step)
+			.each_with_step(file_step, rank_step, limit)
 			.take_while {|square| self.include? square}
 	end
 	private :step_square

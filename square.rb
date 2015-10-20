@@ -33,13 +33,20 @@ class Square
 	end
 	private :step_char
 
-	def each_with_step file_step, rank_step
+	def each_with_step file_step, rank_step, limit = nil
 		next_square = self
+		count = 0
 		Enumerator.new do |y|
-			while true
+			while within_limit(limit, count)
+				count += 1
 				next_square = next_square.step(file_step, rank_step)
 				y <<  next_square
 			end
 		end
+	end
+
+	def within_limit limit, index
+		return true if limit.nil?
+		limit > index
 	end
 end
