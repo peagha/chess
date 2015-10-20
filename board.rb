@@ -26,7 +26,15 @@ class Board
 	def self.empty
 		Board.new
 	end
-	
+
+	def empty_square? square
+		self[square].nil?
+	end
+
+	def has_piece? square
+		!empty_square? square
+	end
+
 	def piece_count
 		@pieces.count
 	end
@@ -71,7 +79,7 @@ class Board
 	
 	def move_list square
 		message = "Can't list possible moves on empty square"  
-		raise EmptySquareError, message if self[square].nil? 
+		raise EmptySquareError, message if empty_square?(square) 
 
 		piece = self[square]
 		move_list = Set.new
@@ -84,7 +92,7 @@ class Board
 	
 	def get_empty_squares  start_square, file_step, rank_step, limit = nil 
 		step_square(start_square, file_step, rank_step, limit)
-			.take_while {|square| self[square].nil? }
+			.take_while {|square| empty_square?(square) }
 	end
 	private :get_empty_squares
 
@@ -101,7 +109,7 @@ class Board
 	
 	def find_next_capture start_square, file_step, rank_step, limit  
 		step_square(start_square, file_step, rank_step, limit)
-			.find { |square| self[square] }
+			.find { |square| has_piece?(square) }
 	end
 	private :find_next_capture
 
