@@ -7,6 +7,7 @@ require_relative "queen"
 require_relative "king"
 require_relative "chesserror"
 require_relative "boardsetup"
+require_relative "square"
 
 class Board
 
@@ -18,7 +19,7 @@ class Board
 	def initialize pieces = nil
 		@pieces = {}
 		pieces.each do |square, piece|
-			self[square.to_s] = piece
+			self[square] = piece
 		end if pieces
 	end
 
@@ -44,11 +45,17 @@ class Board
 	private :team_count
 	
 	def [] square
-		@pieces[square.to_s] 
+		Square === square ?
+			@pieces[square] :
+			@pieces[Square.new(square)]
 	end
 
 	def []= square, piece 
-		@pieces[square.to_s] = piece
+		square_object = Square === square ?
+			square :
+			Square.new(square)
+
+		@pieces[square_object] = piece
 	end
 
 	def move from, to
