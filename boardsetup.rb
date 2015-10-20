@@ -19,7 +19,7 @@ class BoardSetup
 	def setup_pawns
 		{?2 => :white, 
 		 ?7 => :black}.each do |rank, team|
-			('a'..'h').each do |file|
+			(Board::FILE_RANGE).each do |file|
 				square = file + rank
 				@board[square] = Pawn.new(team)
 			end
