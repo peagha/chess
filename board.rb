@@ -119,7 +119,12 @@ class Board
 	private :step_square
 
 	def setup
-
+		setup_pawns()
+		setup_all_except_pawn()
+		self
+	end
+	
+	def setup_pawns
 		{?2 => :white, 
 		 ?7 => :black}.each do |rank, team|
 			('a'..'h').each do |file|
@@ -127,7 +132,10 @@ class Board
 				@pieces[square] = Pawn.new(team)
 			end
 		end
+	end
+	private :setup_pawns
 
+	def setup_all_except_pawn
 		files = {?a => Rook,
 			 ?b => Horse,
 			 ?c => Bishop,
@@ -144,8 +152,7 @@ class Board
 				@pieces[square] = piece_class.new(team)
 			end
 		end
-
-		self
 	end
-
+	private :setup_all_except_pawn
+	
 end
