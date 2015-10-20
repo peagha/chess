@@ -138,7 +138,16 @@ class BoardTest < MiniTest::Test
 
 		assert_equal Set.new(["c3", "a3"]), board.capture_list("b2")
 	end
-	
+
+	def test_pawn_capture_list_with_limit
+		board = Board.new({
+			"b2" => Pawn.white,
+			"d4" => Pawn.black,
+			"a3" => Pawn.black })
+
+		assert_equal Set.new(["a3"]), board.capture_list("b2")
+	end
+
 	def test_bishop_capture_list
 		board = Board.new({
 			"d5" => Bishop.white,
