@@ -103,17 +103,18 @@ class Board
 	end
 	
 	def add_next_capture_to_set set, start_square, file_step, rank_step, limit = nil 
-		step_square(start_square, 
-			    file_step, 
-			    rank_step).each_with_index do |next_square, index|
-			break if limit && limit <= index 
-			if self[next_square]
-				set.add next_square
-				break
-			end
-		end
+		next_capture = step_square(start_square, file_step, rank_step)
+			.each_with_index
+			.take_while { |square, index| within_limit limit, index  } 
+			.find { |(square)| self[square] }
+		set.add(next_capture[0]) if next_capture
 	end
 	private :add_next_capture_to_set
+
+	def within_limit limit, index
+		return true if limit.nil?
+		limit > index
+	end
 
 	def step_square start_square, file_step, rank_step
 		Square.new(start_square)
