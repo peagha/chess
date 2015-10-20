@@ -18,7 +18,7 @@ class Board
 	def initialize pieces = nil
 		@pieces = {}
 		pieces.each do |square, piece|
-			@pieces[square.to_s] = piece
+			self[square.to_s] = piece
 		end if pieces
 	end
 
@@ -54,8 +54,8 @@ class Board
 	def move from, to
 		raise IlegalMoveError if !is_legal_move(from, to)
 
-		@pieces[to] = @pieces[from]
-		@pieces[from] = nil
+		self[to] = self[from]
+		self[from] = nil
 	end
 
 	def is_legal_move from, to
@@ -78,7 +78,7 @@ class Board
 		step_square(start_square, 
 			    file_step, 
 			    rank_step).each_with_index do |next_square, index|
-			break if @pieces[next_square]
+			break if self[next_square]
 			break if limit && limit <= index 
 			set.add next_square
 		end
@@ -100,7 +100,7 @@ class Board
 			    file_step, 
 			    rank_step).each_with_index do |next_square, index|
 			break if limit && limit <= index 
-			if @pieces[next_square]
+			if self[next_square]
 				set.add next_square
 				break
 			end
