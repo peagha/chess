@@ -79,7 +79,7 @@ class Board
 			move_range = get_empty_squares square, *move_step, piece.move_limit
 			move_list.merge move_range
 		end
-		move_list.collect! {|square| square.coordinate}
+		move_list.map! {|square| square.coordinate}
 	end
 	
 	def get_empty_squares  start_square, file_step, rank_step, limit = nil 
@@ -96,7 +96,7 @@ class Board
 			next_capture = find_next_capture square, *move_step, piece.move_limit
 			capture_list.add(next_capture) if next_capture
 		end
-		capture_list.collect! {|square| square.coordinate} 
+		capture_list.map! {|square| square.coordinate} 
 	end
 	
 	def find_next_capture start_square, file_step, rank_step, limit  
