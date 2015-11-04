@@ -73,13 +73,17 @@ class Board
 		self[to] = self[from]
 		self[from] = nil
 
-		@move_history.empty? || @move_history.last.size == 2 ?
+		is_new_turn ?
 			@move_history << [to] :
 			@move_history.last << to
 	end
 
 	def is_legal_move from, to
 		move_list(from).include?(to)
+	end
+
+	def is_new_turn
+		@move_history.empty? || @move_history.last.size == 2
 	end
 	
 	def move_list square
