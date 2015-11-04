@@ -21,6 +21,7 @@ class Board
 		pieces.each do |square, piece|
 			self[square] = piece
 		end if pieces
+		@move_history = []
 	end
 
 	def self.empty
@@ -71,6 +72,8 @@ class Board
 
 		self[to] = self[from]
 		self[from] = nil
+
+		@move_history << to
 	end
 
 	def is_legal_move from, to
@@ -127,5 +130,9 @@ class Board
 
 	def setup
 		BoardSetup.new(self).load_default
+	end
+
+	def move_history
+		@move_history
 	end
 end
