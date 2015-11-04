@@ -73,7 +73,7 @@ class Board
 		self[to] = self[from]
 		self[from] = nil
 
-		@move_history << to
+		@move_history << [to]
 	end
 
 	def is_legal_move from, to
