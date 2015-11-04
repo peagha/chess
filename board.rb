@@ -73,9 +73,11 @@ class Board
 		self[to] = self[from]
 		self[from] = nil
 
+		piece_char = Pawn === self[to] ? "" : self[to].piece_char
+		move_record = piece_char + to
 		is_new_turn ?
-			@move_history << [to] :
-			@move_history.last << to
+			@move_history << [move_record] :
+			@move_history.last << move_record
 	end
 
 	def is_legal_move from, to
