@@ -73,7 +73,9 @@ class Board
 		self[to] = self[from]
 		self[from] = nil
 
-		@move_history << [to]
+		@move_history.empty? || @move_history.last.size == 2 ?
+			@move_history << [to] :
+			@move_history.last << to
 	end
 
 	def is_legal_move from, to
