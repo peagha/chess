@@ -16,4 +16,9 @@ class MoveHistoryTest < MiniTest::Test
 		@board.move "a7", "a6"
 		assert_equal [["a3","a6"]], @board.move_history
 	end
+
+	def test_horse_move_history
+		@board.move "g1", "f3"
+		assert_equal [["Kf3"]], @board.move_history
+	end
 end
